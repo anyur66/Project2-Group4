@@ -169,7 +169,7 @@ The PDB (https://www.rcsb.org/) has a sequence search option that you can use to
 
 **View in Swiss Model**
 
-![WechatIMG64](/Users/anyu/Nottingham/LIFE4136/Rotation2-GitHub/WechatIMG64.jpg)
+![](https://github.com/anyur66/Project2-Group4/blob/main/directory/WechatIMG64.jpg)
 
 ![WechatIMG65](/Users/anyu/Nottingham/LIFE4136/Rotation2-GitHub/WechatIMG65.jpg)
 
