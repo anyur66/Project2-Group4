@@ -179,5 +179,13 @@ The PDB (https://www.rcsb.org/) has a sequence search option that you can use to
 
 **View in Alpha Fold**
 
+![](https://github.com/anyur66/Project2-Group4/blob/main/directory/671714042337_.pic.jpg)
+
+![](https://github.com/anyur66/Project2-Group4/blob/main/directory/701714042514_.pic.jpg)
+
+paste sequence(s) and run
+
+
+
 
 
