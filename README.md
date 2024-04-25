@@ -1,42 +1,66 @@
+
+
+# Table of contents
+
+# Introduction
+
+This is LIFE4136 project rotation2 group4
+
+# Requirements
+
+-Linux or macOS
+
 # Installation
 
 1. IGV
 
+   https://igv.org/
+
 2. EXPASY
 
-3. Swiss Model
+3. pyMOL
 
-4. Alpha Fold
+   https://pymol.org/#download
 
-5. Install bcftools
+4. Swiss Model
+
+   https://swissmodel.expasy.org/
+
+5. Alpha Fold
+
+   https://colab.research.google.com/github/deepmind/alphafold/blob/main/notebooks/AlphaFold.ipynb
+
+6. Install bcftools
 
    ```brew brew install bcftools```
 
-6. Install samtools
+7. Install samtools
 
    ```shellbrew install samtools```
 
 # Data
 
-1. Reference_genome
+-Reference_genome
 
-   C_excelsa_V5_braker2_wRseq.gff3
+​	-C_excelsa_V5_braker2_wRseq.gff3
 
-   C_excelsa_V5.dict
+​	-C_excelsa_V5.dict
 
-   C_excelsa_V5.fasta
+​	-C_excelsa_V5.fasta
 
-   C_excelsa_V5.fasta.fai
+​	-C_excelsa_V5.fasta.fai
 
-2. VCFs
+-VCFs
 
-   UK_scan_dips.vcf
+​	-UK_scan_dips.vcf
 
-   UK_scan_dips.vcf.idx
+​	-UK_scan_dips.vcf.idx
 
-   UK_scan_tets.vcf
+​	-UK_scan_tets.vcf
 
-   UK_scan_tets.vcf.idx
+​	-UK_scan_tets.vcf.idx
+
+C_excelsa_V5.fasta and UK_scan_tets.vcf are too big to upload
 
 # Commands
 
