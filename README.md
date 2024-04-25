@@ -66,7 +66,7 @@ create a filtered gff3 file for the g5766.t1 gene
 
 **create an output file of the diploid g5766.t1 gene**
 
-```bcftools view -r Cexcelsa_scaf_4:27471771-27471836,Cexcelsa_scaf_4:27471978-27472061,Cexcelsa_scaf_4:27472160-27472288,Cexcelsa_scaf_4:27472382-27472450,Cexcelsa_scaf_4:27472531-27472611,Cexcelsa_scaf_4:27472700-27472804,Cexcelsa_scaf_4:27472891-27473121,Cexcelsa_scaf_4:27473210-27474400,Cexcelsa_scaf_4:27474735-27475839,Cexcelsa_scaf_4:27475929-27476050,Cexcelsa_scaf_4:27476143-27476292,Cexcelsa_scaf_4:27476446-27476607,Cexcelsa_scaf_4:27476687-27476845,Cexcelsa_scaf_4:27476939-27477055,Cexcelsa_scaf_4:27477147-27477257,Cexcelsa_scaf_4:27477347-27477979 UK_scan_dips.vcf.gz -i 'AF>0.5' -m 1 --types snps -o dips_g5766.t1.vcf```
+```samtools faidx C_excelsa_V5.fasta Cexcelsa_scaf_4:27471771-27471836 Cexcelsa_scaf_4:27471978-27472061 Cexcelsa_scaf_4:27472160-27472288 Cexcelsa_scaf_4:27472382-27472450 Cexcelsa_scaf_4:27472531-27472611 Cexcelsa_scaf_4:27472700-27472804 Cexcelsa_scaf_4:27472891-27473121 Cexcelsa_scaf_4:27473210-27474400 Cexcelsa_scaf_4:27474735-27475839 Cexcelsa_scaf_4:27475929-27476050 Cexcelsa_scaf_4:27476143-27476292 Cexcelsa_scaf_4:27476446-27476607 Cexcelsa_scaf_4:27476687-27476845 Cexcelsa_scaf_4:27476939-27477055 Cexcelsa_scaf_4:27477147-27477257 Cexcelsa_scaf_4:27477347-27477979 > reference_g5766.fasta```
 
 **zip the output file and index:**
 
@@ -115,7 +115,7 @@ The site Cexcelsa_scaf_4:27477719 overlaps with another variant, skipping...
 
 ```tabix -p vcf tets_g5766.t1.vcf.gz```
 
-```bcftools consensus -s - -f ../Reference_Genome/reference_g5766.fasta tets_g5766.t1.vcf.gz > a_consensus_tets_g5766.t1_sequence.fasta``
+```bcftools consensus -s - -f ../Reference_Genome/reference_g5766.fasta tets_g5766.t1.vcf.gz > a_consensus_tets_g5766.t1_sequence.fasta```
 
 ```shellgrep -v ">" a_consensus_tets_g5766.t1_sequence.fasta > b_consensus_tets_g5766.t1_sequence.fasta
 tr -d '\n' < b_consensus_tets_g5766.t1_sequence.fasta > consensus_tets_g5766.t1_sequence.fasta
