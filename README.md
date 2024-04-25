@@ -1,11 +1,20 @@
 # Installation
 
 1. IGV
+
 2. EXPASY
+
 3. Swiss Model
+
 4. Alpha Fold
-5. ```brew brew install bcftools```
-6. ```shellbrew install samtools```
+
+5. Install bcftools
+
+   ```brew brew install bcftools```
+
+6. Install samtools
+
+   ```shellbrew install samtools```
 
 # Data
 
@@ -29,41 +38,32 @@
 
    UK_scan_tets.vcf.idx
 
-# Dependencies
-
-
-
-
-
 # Commands
 
-```shell
-# 注释说明的内容,下面就是shell命令
-###########################################BCFTOOLS#############################################################
 #zip the diploids vcf: UK_scan_dips.vcf.gz
-bgzip UK_scan_dips.vcf
+```bgzip UK_scan_dips.vcf```
 #index the compressed file
-tabix -p vcf UK_scan_dips.vcf.gz
+```tabix -p vcf UK_scan_dips.vcf.gz```
 
 #zip the tetraploids: UK_scan_tets.vcf.gz
-bgzip UK_scan_tets.vcf
+```bgzip UK_scan_tets.vcf```
 #index it
-tabix -p vcf UK_scan_tets.vcf.gz
+```tabix -p vcf UK_scan_tets.vcf.gz```
 
-#######################################################g5766.t1#########################
+##########################################g5766.t1#############################################
 #n.b. the g5766.t1 gene is read backwards
 #create a filtered gff3 file for the g5766.t1 gene
-grep "g5766.t1" C_excelsa_V5_braker2_wRseq.gff3 | grep "CDS" > g5766.t1.gff3
+```grep "g5766.t1" C_excelsa_V5_braker2_wRseq.gff3 | grep "CDS" > g5766.t1.gff3```
 
 #create an output file of the diploid g5766.t1 gene
-bcftools view -r Cexcelsa_scaf_4:27471771-27471836,Cexcelsa_scaf_4:27471978-27472061,Cexcelsa_scaf_4:27472160-27472288,Cexcelsa_scaf_4:27472382-27472450,Cexcelsa_scaf_4:27472531-27472611,Cexcelsa_scaf_4:27472700-27472804,Cexcelsa_scaf_4:27472891-27473121,Cexcelsa_scaf_4:27473210-27474400,Cexcelsa_scaf_4:27474735-27475839,Cexcelsa_scaf_4:27475929-27476050,Cexcelsa_scaf_4:27476143-27476292,Cexcelsa_scaf_4:27476446-27476607,Cexcelsa_scaf_4:27476687-27476845,Cexcelsa_scaf_4:27476939-27477055,Cexcelsa_scaf_4:27477147-27477257,Cexcelsa_scaf_4:27477347-27477979 UK_scan_dips.vcf.gz -i 'AF>0.5' -m 1 --types snps -o dips_g5766.t1.vcf
+```bcftools view -r Cexcelsa_scaf_4:27471771-27471836,Cexcelsa_scaf_4:27471978-27472061,Cexcelsa_scaf_4:27472160-27472288,Cexcelsa_scaf_4:27472382-27472450,Cexcelsa_scaf_4:27472531-27472611,Cexcelsa_scaf_4:27472700-27472804,Cexcelsa_scaf_4:27472891-27473121,Cexcelsa_scaf_4:27473210-27474400,Cexcelsa_scaf_4:27474735-27475839,Cexcelsa_scaf_4:27475929-27476050,Cexcelsa_scaf_4:27476143-27476292,Cexcelsa_scaf_4:27476446-27476607,Cexcelsa_scaf_4:27476687-27476845,Cexcelsa_scaf_4:27476939-27477055,Cexcelsa_scaf_4:27477147-27477257,Cexcelsa_scaf_4:27477347-27477979 UK_scan_dips.vcf.gz -i 'AF>0.5' -m 1 --types snps -o dips_g5766.t1.vcf```
 
 #zip the output file and index:
-bgzip dips_g5766.t1.vcf
-tabix -p vcf dips_g5766.t1.vcf.gz
+```bgzip dips_g5766.t1.vcf```
+```tabix -p vcf dips_g5766.t1.vcf.gz```
 
 #filter the reference file for just the g5766.t1 gene
-samtools faidx C_excelsa_V5.fasta Cexcelsa_scaf_4:27471771-27471836 \
+```shellsamtools faidx C_excelsa_V5.fasta Cexcelsa_scaf_4:27471771-27471836 \
 Cexcelsa_scaf_4:27471978-27472061 \
 Cexcelsa_scaf_4:27472160-27472288 \
 Cexcelsa_scaf_4:27472382-27472450 \
@@ -78,12 +78,15 @@ Cexcelsa_scaf_4:27476446-27476607 \
 Cexcelsa_scaf_4:27476687-27476845 \
 Cexcelsa_scaf_4:27476939-27477055 \
 Cexcelsa_scaf_4:27477147-27477257 \
-Cexcelsa_scaf_4:27477347-27477979 > reference_g5766.fasta
+Cexcelsa_scaf_4:27477347-27477979 > reference_g5766.fasta```
+```
 
 #create a consensus sequence for the diploid g5766.t1 gene
-bcftools consensus -s - -f ../Reference_Genome/reference_g5766.fasta dips_g5766.t1.vcf.gz > unfiltered_consensus_dips_g5766.t1_sequence.fasta
-grep -v ">" unfiltered_consensus_dips_g5766.t1_sequence.fasta > semi_filtered_consensus_dips_g5766.t1_sequence.fasta
-tr -d '\n' < semi_filtered_consensus_dips_g5766.t1_sequence.fasta > consensus_dips_g5766.t1_sequence.fasta
+```bcftools consensus -s - -f ../Reference_Genome/reference_g5766.fasta dips_g5766.t1.vcf.gz > unfiltered_consensus_dips_g5766.t1_sequence.fasta```
+
+```shellgrep -v ">" unfiltered_consensus_dips_g5766.t1_sequence.fasta > semi_filtered_consensus_dips_g5766.t1_sequence.fasta
+tr -d '\n' < semi_filtered_consensus_dips_g5766.t1_sequence.fasta > consensus_dips_g5766.t1_sequence.fasta```
+```
 
 #Warning: ignoring overlapping variant starting at Cexcelsa_scaf_4:27477243
 #The site Cexcelsa_scaf_4:27477719 overlaps with another variant, skipping...
@@ -92,39 +95,42 @@ tr -d '\n' < semi_filtered_consensus_dips_g5766.t1_sequence.fasta > consensus_di
 ##repeat for tetraploid##
 #########################
 
-bcftools view -r Cexcelsa_scaf_4:27471771-27471836,Cexcelsa_scaf_4:27471978-27472061,Cexcelsa_scaf_4:27472160-27472288,Cexcelsa_scaf_4:27472382-27472450,Cexcelsa_scaf_4:27472531-27472611,Cexcelsa_scaf_4:27472700-27472804,Cexcelsa_scaf_4:27472891-27473121,Cexcelsa_scaf_4:27473210-27474400,Cexcelsa_scaf_4:27474735-27475839,Cexcelsa_scaf_4:27475929-27476050,Cexcelsa_scaf_4:27476143-27476292,Cexcelsa_scaf_4:27476446-27476607,Cexcelsa_scaf_4:27476687-27476845,Cexcelsa_scaf_4:27476939-27477055,Cexcelsa_scaf_4:27477147-27477257,Cexcelsa_scaf_4:27477347-27477979 UK_scan_tets.vcf.gz -i 'AF>0.5' -m 1 --types snps -o tets_g5766.t1.vcf
+```bcftools view -r Cexcelsa_scaf_4:27471771-27471836,Cexcelsa_scaf_4:27471978-27472061,Cexcelsa_scaf_4:27472160-27472288,Cexcelsa_scaf_4:27472382-27472450,Cexcelsa_scaf_4:27472531-27472611,Cexcelsa_scaf_4:27472700-27472804,Cexcelsa_scaf_4:27472891-27473121,Cexcelsa_scaf_4:27473210-27474400,Cexcelsa_scaf_4:27474735-27475839,Cexcelsa_scaf_4:27475929-27476050,Cexcelsa_scaf_4:27476143-27476292,Cexcelsa_scaf_4:27476446-27476607,Cexcelsa_scaf_4:27476687-27476845,Cexcelsa_scaf_4:27476939-27477055,Cexcelsa_scaf_4:27477147-27477257,Cexcelsa_scaf_4:27477347-27477979 UK_scan_tets.vcf.gz -i 'AF>0.5' -m 1 --types snps -o tets_g5766.t1.vcf```
 
-bgzip tets_g5766.t1.vcf
-tabix -p vcf tets_g5766.t1.vcf.gz
+```bgzip tets_g5766.t1.vcf```
+```tabix -p vcf tets_g5766.t1.vcf.gz```
 
-bcftools consensus -s - -f ../Reference_Genome/reference_g5766.fasta tets_g5766.t1.vcf.gz > a_consensus_tets_g5766.t1_sequence.fasta
-grep -v ">" a_consensus_tets_g5766.t1_sequence.fasta > b_consensus_tets_g5766.t1_sequence.fasta
-tr -d '\n' < b_consensus_tets_g5766.t1_sequence.fasta > consensus_tets_g5766.t1_sequence.fasta
+```bcftools consensus -s - -f ../Reference_Genome/reference_g5766.fasta tets_g5766.t1.vcf.gz > a_consensus_tets_g5766.t1_sequence.fasta```
+```shellgrep -v ">" a_consensus_tets_g5766.t1_sequence.fasta > b_consensus_tets_g5766.t1_sequence.fasta
+tr -d '\n' < b_consensus_tets_g5766.t1_sequence.fasta > consensus_tets_g5766.t1_sequence.fasta```
+```
 
 #Warning: ignoring overlapping variant starting at Cexcelsa_scaf_4:27477243
 #The site Cexcelsa_scaf_4:27477719 overlaps with another variant, skipping...
 
-###############################################################################g44492.t1###############################################################################
+###########################################g44492.t1###########################################
 #n.b. the g44492.t1 gene is read backwards
 #create a filtered gff3 file for the g44492.t1 gene
-grep "g44492.t1" C_excelsa_V5_braker2_wRseq.gff3 | grep "CDS" > g44492.t1.gff3
+```grep "g44492.t1" C_excelsa_V5_braker2_wRseq.gff3 | grep "CDS" > g44492.t1.gff3```
 
 #create an output file of the diploid g44492.t1 gene
-bcftools view -r Cexcelsa_scaf_2:28893505-28893797,Cexcelsa_scaf_2:28894013-28894486,Cexcelsa_scaf_2:28894742-28895015 UK_scan_dips.vcf.gz -i 'AF>0.5' -m 1 --types snps -o dips_g44492.t1.vcf
+```bcftools view -r Cexcelsa_scaf_2:28893505-28893797,Cexcelsa_scaf_2:28894013-28894486,Cexcelsa_scaf_2:28894742-28895015 UK_scan_dips.vcf.gz -i 'AF>0.5' -m 1 --types snps -o dips_g44492.t1.vcf```
 
 #zip the output file and index:
-bgzip dips_g44492.t1.vcf
-tabix -p vcf dips_g44492.t1.vcf.gz
+```bgzip dips_g44492.t1.vcf```
+```shelltabix -p vcf dips_g44492.t1.vcf.gz```
 
 #filter the reference file for just the g44492.t1 gene
-samtools faidx C_excelsa_V5.fasta Cexcelsa_scaf_2:28893505-28893797 \
+```shellsamtools faidx C_excelsa_V5.fasta Cexcelsa_scaf_2:28893505-28893797 \
 Cexcelsa_scaf_2:28894013-28894486 \
-Cexcelsa_scaf_2:28894742-28895015 > reference_g44492.fasta
+Cexcelsa_scaf_2:28894742-28895015 > reference_g44492.fasta```
+```
 
 #create a consensus sequence for the diploid g44492.t1 gene
-bcftools consensus -s - -f ../Reference_Genome/reference_g44492.fasta dips_g44492.t1.vcf.gz > a_consensus_dips_g44492.t1_sequence.fasta
-grep -v ">" a_consensus_dips_g44492.t1_sequence.fasta > b_consensus_dips_g44492.t1_sequence.fasta
-tr -d '\n' < b_consensus_dips_g44492.t1_sequence.fasta > consensus_dips_g44492.t1_sequence.fasta
+```bcftools consensus -s - -f ../Reference_Genome/reference_g44492.fasta dips_g44492.t1.vcf.gz > a_consensus_dips_g44492.t1_sequence.fasta```
+```shellgrep -v ">" a_consensus_dips_g44492.t1_sequence.fasta > b_consensus_dips_g44492.t1_sequence.fasta
+tr -d '\n' < b_consensus_dips_g44492.t1_sequence.fasta > consensus_dips_g44492.t1_sequence.fasta```
+```
 
 #applied 0 variants
 
@@ -132,28 +138,28 @@ tr -d '\n' < b_consensus_dips_g44492.t1_sequence.fasta > consensus_dips_g44492.t
 ##repeat for tetraploid##
 #########################
 
-bcftools view -r Cexcelsa_scaf_2:28893505-28893797,Cexcelsa_scaf_2:28894013-28894486,Cexcelsa_scaf_2:28894742-28895015 UK_scan_tets.vcf.gz -i 'AF>0.5' -m 1 --types snps -o tets_g44492.t1.vcf
+```bcftools view -r Cexcelsa_scaf_2:28893505-28893797,Cexcelsa_scaf_2:28894013-28894486,Cexcelsa_scaf_2:28894742-28895015 UK_scan_tets.vcf.gz -i 'AF>0.5' -m 1 --types snps -o tets_g44492.t1.vcf```
 
-bgzip tets_g44492.t1.vcf
-tabix -p vcf tets_g44492.t1.vcf.gz
+```bgzip tets_g44492.t1.vcf```
+```tabix -p vcf tets_g44492.t1.vcf.gz```
 
-bcftools consensus -s - -f ../Reference_Genome/reference_g44492.t1.fasta tets_g44492.t1.vcf.gz > a_consensus_tets_g44492.t1_sequence.fasta
-grep -v ">" a_consensus_tets_g44492.t1_sequence.fasta > b_consensus_tets_g44492.t1_sequence.fasta
+```bcftools consensus -s - -f ../Reference_Genome/reference_g44492.t1.fasta tets_g44492.t1.vcf.gz > a_consensus_tets_g44492.t1_sequence.fasta```
+
+```grep -v ">" a_consensus_tets_g44492.t1_sequence.fasta > b_consensus_tets_g44492.t1_sequence.fasta
 tr -d '\n' < b_consensus_tets_g44492.t1_sequence.fasta > consensus_tets_g44492.t1_sequence.fasta
+```
 
 #applied 0 variants
 
-#############################################################################View in EXPASY####################################################################################
+View in EXPASY###################################
 
+#############################################################################Swiss Model#########################
 
-###############################################################################Swiss Model######################################################################################
-
-
-###############################################################################Alpha Fold######################################################################################
+###############################################################################Alpha Fold#####################
 
 #diploid:
 
-Downloading alphafold2_ptm weights to .: 100%|██████████| 3.47G/3.47G [00:31<00:00, 120MB/s]
+```Downloading alphafold2_ptm weights to .: 100%|██████████| 3.47G/3.47G [00:31<00:00, 120MB/s]
 2024-02-26 13:18:02,679 Running on GPU
 2024-02-26 13:18:02,847 Found 5 citations for tools or databases
 2024-02-26 13:18:02,848 Query 1/1: dip_g5766_protein_dccf7 (length 1505)
@@ -190,6 +196,5 @@ Traceback (most recent call last):
     raise ValueError(f'Invalid character in the sequence: {aa_type}')
 ValueError: Invalid character in the sequence: -
 2024-02-26 13:20:39,522 Done
-0
-
+0```
 ```
