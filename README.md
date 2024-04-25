@@ -38,32 +38,48 @@ C_excelsa_V5.fasta and UK_scan_tets.vcf are too big to upload
 
 **Install bcftools and samtools**
 
-```brew brew install bcftools```
+```shell
+brew install bcftools
 
-```shellbrew install samtools```
+brew install samtools
+```
+
+
 
 **zip the diploids vcf: UK_scan_dips.vcf.gz**
 
-```bgzip UK_scan_dips.vcf```
+```shell
+bgzip UK_scan_dips.vcf
+```
+
 **index the compressed file**
 
-```tabix -p vcf UK_scan_dips.vcf.gz```
+```shell
+tabix -p vcf UK_scan_dips.vcf.gz
+```
 
 **zip the tetraploids: UK_scan_tets.vcf.gz**
 
-```bgzip UK_scan_tets.vcf```
+```shell
+bgzip UK_scan_tets.vcf
+```
+
 **index it**
 
-```tabix -p vcf UK_scan_tets.vcf.gz```
+```shell
+tabix -p vcf UK_scan_tets.vcf.gz
+```
 
 
 
 **g5766.t1**
+
 n.b. the g5766.t1 gene is read backwards
+
 create a filtered gff3 file for the g5766.t1 gene
 
 ```shell
-```grep "g5766.t1" C_excelsa_V5_braker2_wRseq.gff3 | grep "CDS" > g5766.t1.gff3```
+grep "g5766.t1" C_excelsa_V5_braker2_wRseq.gff3 | grep "CDS" > g5766.t1.gff3
 ```
 
 **create an output file of the diploid g5766.t1 gene**
